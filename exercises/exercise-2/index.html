@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="event-exercise">
+    <div>
+      Text to be changed:
+      <b><p>{{ value }}</p></b>
+    </div>
+
+    <div>
+      First Input works with Enter Key
+      <input v-on:keyup.enter="updateValue($event)" type="text">
+    </div>
+    
+    <br>
+
+    <div>
+      First Input works with Ctrl and Enter Key
+      <input v-on:keyup.ctrl.enter="updateValue($event)" type="text">
+    </div>
+ 
+    <br>
+
+    <div>
+      The form
+      <form action="" method="GET" v-on:submit.prevent >
+        <input type="text" placeholder="name">
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#event-exercise',
+      data: {
+        value: 'Initial Text'
+      },
+      methods: {
+        updateValue: function(event) {
+          this.value = event.target.value;
+          return ;
+        }
+      }
+    })
+  </script>
+</body>
+</html>

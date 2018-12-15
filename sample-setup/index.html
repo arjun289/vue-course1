@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+    <div id="app">
+      {{ message }}
+      <br>
+      I am {{ age > 60 ? 'old' : 'young' }}
+      <div>
+        {{ getFullName(firstName, lastName) }}
+      </div>
+
+      <button v-on:click="clickedButton">Click Me!</button>
+      <a href="https://www.google.com" v-on:click.prevent="clickedButton">Click Me Now!</a>
+      <input v-on:keyup.enter.space="pressedAkey" type="text">
+
+      <br>
+
+      <div>
+        Item In Stock
+        <p v-if="itemsInStock > 10">{{itemsInStock}} in Stock.</p>
+        <p v-else-if="itemsInStock > 0">Hurry up few items left only {{ itemsInStock }}</p>
+        <p v-else> Sorry we are out!</p>
+      </div>
+
+      <div>
+        <table>
+          <thead>
+            <th>Index</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Company</th>
+          </thead>
+          <tbody>
+            <tr v-for="(employee, index) in employees">
+              <td>{{ index }}</td>
+              <td>{{ employee.name }}</td>
+              <td>{{ employee.age }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <ul>
+          <li v-for="(value, property, index)  in person">
+            {{index}} -> {{property}}: {{value}}
+          </li>
+        </ul>
+
+        <br>
+        <div>
+          Through numbers
+          <li v-for="(n,index) in 10">
+            {{ n }} * {{index}} = {{ n * index }}
+          </li>
+        </div>
+
+        <br>
+
+        <div>
+          Update Strategy
+          <ul>
+            <li v-for="person in people" v-bind:key="person.id">
+              {{person.id}}: {{person.name}}
+              <input type="text">
+            </li>
+          </ul>
+        </div>
+    
+      </div>
+    </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        message: 'Hello World!',
+        age: 30,
+        firstName: 'Arjun',
+        lastName: 'Singh',
+        itemsInStock: 0,
+        employees: [
+          {name: 'Arjun', age: 23},
+          {name: 'Akanksha', age: 23},
+          {name: 'Jadu', age: 24}
+        ],
+
+        person: {
+          firstname: 'Arjun',
+          lastName: 'Singh',
+          age: 27
+        },
+        people: [
+          {id: 1, name: 'Arjun', age: 23},
+          {id: 2, name: 'Akanksha', age: 23},
+          {id: 3, name: 'Jadu', age: 24}
+        ]
+      },
+
+      methods: {
+        getFullName: function() {
+          return this.firstName + ' ' + this.lastName;
+        },
+
+        clickedButton: function(event) {
+          alert("you just clicked the button");
+        },
+
+        pressedAkey: function(){
+          alert('You pressed Enter or Space');
+        }
+
+      }
+    })
+  </script>
+</body>
+</html>

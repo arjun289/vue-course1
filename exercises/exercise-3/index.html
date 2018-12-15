@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <input type="password" placeholder="Enter the password" v-model="password">
+
+    <p v-if="lenPassword() > 8">Awesome! password is longer than 8 characters</p>
+    <p v-else-if="lenPassword() > 0" >Please enter a longer password</p>
+    <p v-else>Please enter a password</p>
+    <br>
+    Category and it's sub
+    <div>
+      <ol>
+        <li v-for="category in categories">
+          {{ category.name }}
+          <ul>
+            <li v-for="sub in category.sub">
+              {{sub}}
+            </li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+
+      data: {
+        password: '',
+        categories: [
+          {name: 'Javascript', sub: ['Vue', 'React', 'Angular2']},
+          {name: 'Database', sub: ['MySQL', 'Postgres', 'MariaDB']},
+          {name: 'OS', sub: ['macOS', 'Linux', 'Windows']}
+        ]
+      },
+
+      methods: {
+        lenPassword: function() {
+          return this.password.length
+        }
+      }
+
+    })
+  </script>
+</body>
+</html>

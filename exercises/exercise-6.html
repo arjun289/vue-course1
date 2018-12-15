@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+  <style>
+    .shape {
+      width: 150px;
+      height: 150px;
+      background-color: blue;
+    }
+
+    .highlighted {
+      background-color: #DECA9B;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+  
+    <div class="shape" v-bind:style="shapeStyles" v-on:click="toggleShape()"></div>
+
+    <h1>
+      Employees
+    </h1>
+    <table border="1">
+      <thead>
+        <th>Name</th>
+        <th>Title</th>
+      </thead>
+      <tbody>
+        <tr v-for="(emp,index) in employees" v-bind:class="{'highlighted' : index % 2 == 0}">
+          <td>{{ emp.name }}</td>
+          <td>{{ emp.title }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+  new Vue({
+    el: '#app',
+
+    data: {
+      shapeStyles: { },
+      employees: [
+          {name: 'Arjun', title: "accountant"},
+          {name: 'Akanksha', title: "manager"},
+          {name: 'Jadu', title: "expert"}
+        ],
+    },
+
+    methods: {
+      toggleShape: function() {
+        if(!this.shapeStyles['border-radius']) {
+          Vue.set(this.shapeStyles, 'border-radius', '50%')
+        }else {
+          Vue.set(this.shapeStyles, 'border-radius', '')
+        }
+        
+      }
+    }
+  })
+  </script>
+</body>
+</html>
